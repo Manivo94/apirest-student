@@ -62,4 +62,14 @@ public class StudentService {
 			students.add(student);
 			return student;
 		}
+		
+		//Modificar estudiante
+		public Student updateStudent(Student student, String name) {
+			Student studentUpdate = getStudentByName(name);
+			studentUpdate.setLastName(student.getLastName());;
+			studentUpdate.setEdad(student.getEdad());
+			studentUpdate.setEmail(student.getEmail());
+			studentUpdate.setSexo(student.getSexo());
+			return studentUpdate;
+		}
 }
