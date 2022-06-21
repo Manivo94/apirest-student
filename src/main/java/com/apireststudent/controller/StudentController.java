@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,9 +43,15 @@ public class StudentController {
 		return new ResponseEntity<Student>(studentService.createStudent(student), HttpStatus.CREATED);
 	}
 	
-	@PutMapping(value="{name}")
+	@PutMapping(value="/{name}")
 	public ResponseEntity<Student> updateStudent(@PathVariable("name")String name,
 			@RequestBody Student student){
 		return new ResponseEntity<Student>(studentService.updateStudent(student, name), HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value="/{name}")
+	public ResponseEntity<Void> deleteStudent(@PathVariable("name")String name){
+		studentService.deleteStudent(name);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

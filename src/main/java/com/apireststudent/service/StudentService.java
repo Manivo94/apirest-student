@@ -72,4 +72,10 @@ public class StudentService {
 			studentUpdate.setSexo(student.getSexo());
 			return studentUpdate;
 		}
+		
+		//Eliminar estudiante
+		public void deleteStudent(String name) {
+			Student studentDelete = getStudentByName(name);
+			students.remove(studentDelete);
+		}
 }
