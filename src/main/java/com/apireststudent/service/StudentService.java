@@ -52,4 +52,14 @@ public class StudentService {
 		return students.stream().filter(u -> u.getName().equals(name)).findAny().orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,
 				String.format("Studen %s not found", name)));
 	}
+	
+	//Crear estudiante
+		public Student createStudent(Student student) {
+			if(students.stream().anyMatch(u -> u.getName().equals(student.getName()))) {
+				throw new ResponseStatusException(HttpStatus.CONFLICT,
+				String.format("Student %s Already Exists", student.getName()));
+			}
+			students.add(student);
+			return student;
+		}
 }

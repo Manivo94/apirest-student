@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apireststudent.entity.Student;
@@ -36,4 +35,9 @@ public class StudentController {
 		return new ResponseEntity<Student>(studentService.getStudentByName(name), HttpStatus.OK);
 	}
 	
+	//Crear estudiante
+	@PostMapping
+	public ResponseEntity<Student>CreateStudent(@RequestBody Student student){
+		return new ResponseEntity<Student>(studentService.createStudent(student), HttpStatus.CREATED);
+	}
 }
