@@ -6,7 +6,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.apireststudent.entity.Student;
 import com.github.javafaker.Faker;
@@ -43,5 +45,11 @@ public class StudentService {
 	
 	public List<Student> getStudent(){
 		return students;
+	}
+	
+	//Buscar por nombre
+	public Student getStudentByName(String name) {
+		return students.stream().filter(u -> u.getName().equals(name)).findAny().orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,
+				String.format("Studen %s not found", name)));
 	}
 }
